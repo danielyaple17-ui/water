@@ -1,0 +1,9 @@
+{
+  "name": "Tilt Water",
+  "short_name": "Water",
+  "start_url": ".",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#0b0e16",
+  "theme_color": "#0b0e16"
+}

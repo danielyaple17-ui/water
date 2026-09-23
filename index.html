@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0e16">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Tilt Water</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <style>
+    :root { --bg: #0b0e16; --fg: #e8f1ff; --muted: #9fb3cc; --accent: #3aa8ff; }
+    html, body {
+      margin: 0; height: 100%; overflow: hidden; background: var(--bg); color: var(--fg);
+      font: 16px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      overscroll-behavior: none; -webkit-user-select: none; user-select: none;
+      -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent;
+    }
+    canvas {
+      position: fixed; inset: 0; width: 100%; height: 100%; display: block;
+      touch-action: none;
+    }
+    #start {
+      position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center;
+      justify-content: flex-start; gap: 14px; padding: 22vh 24px 24px; text-align: center;
+      background: linear-gradient(to bottom, rgba(8, 11, 18, 0.55), rgba(8, 11, 18, 0.1) 70%);
+      text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
+    }
+    #start h1 { margin: 0; font-size: 40px; font-weight: 700; letter-spacing: 0.3px; }
+    #start p { margin: 0; color: var(--muted); max-width: 320px; }
+    #startBtn {
+      margin-top: 8px; padding: 14px 34px; border: 0; border-radius: 999px; font: inherit;
+      font-weight: 600; font-size: 18px; color: #fff; background: var(--accent); cursor: pointer;
+      box-shadow: 0 6px 24px rgba(58, 168, 255, 0.35); text-shadow: none;
+    }
+    #startBtn:active { transform: scale(0.97); }
+    #hud {
+      position: fixed; top: calc(10px + env(safe-area-inset-top)); right: calc(10px + env(safe-area-inset-right));
+      display: flex; gap: 8px;
+    }
+    #hud button {
+      width: 44px; height: 44px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(20, 28, 42, 0.55); color: var(--fg); font-size: 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; padding: 0;
+    }
+    #note {
+      position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom)); transform: translateX(-50%);
+      max-width: calc(100% - 32px); padding: 8px 14px; border-radius: 12px; font-size: 14px;
+      background: rgba(20, 28, 42, 0.8); color: var(--muted); text-align: center;
+      transition: opacity 0.6s; pointer-events: none;
+    }
+    .hidden { display: none !important; }
+    .faded { opacity: 0; }
+  </style>
+</head>
+<body>
+  <canvas id="c"></canvas>
+
+  <div id="hud" class="hidden">
+    <button id="resetBtn" type="button" aria-label="Reset water" title="Reset water">&#x21bb;</button>
+  </div>
+
+  <div id="note" class="faded"></div>
+
+  <div id="start">
+    <h1>Tilt Water</h1>
+    <p>Tilt your phone to slosh the water around. Touch the screen to stir it.</p>
+    <button id="startBtn" type="button">Start</button>
+  </div>
+
+  <script src="fluid.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
